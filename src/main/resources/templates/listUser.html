@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>hello</title>
+</head>
+<body>
+<div align="center">
+    <table border="1">
+        <tr>
+            <th>序号</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>职业</th>
+            <td>编辑</td>
+            <td>删除</td>
+        </tr>
+        <tr th:each="user:${pageInfo.list}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.age}"></td>
+            <td th:text="${user.info}"></td>
+            <td><a th:href="@{/user/updateUser(id=${user.id})}">编辑</a></td>
+            <td><a th:href="@{/user/deleteUserById(id=${user.id})}">删除</a></td>
+        </tr>
+    </table>
+    <td colspan="6" align="center"><a th:href="@{/user/insertUser}">添加</a></td>
+    <p>当前 <span th:text="${pageInfo.pageNum}"></span> 页,总 <span th:text="${pageInfo.pages}"></span> 页,共 <span th:text="${pageInfo.total}"></span> 条记录</p>
+    <a th:href="@{/user/listUser}">首页</a>
+    <a th:href="@{/user/listUser(pageNum=${pageInfo.hasPreviousPage}?${pageInfo.prePage}:1)}">上一页</a>
+    <a th:href="@{/user/listUser(pageNum=${pageInfo.hasNextPage}?${pageInfo.nextPage}:${pageInfo.pages})}">下一页</a>
+    <a th:href="@{/user/listUser(pageNum=${pageInfo.pages})}">尾页</a>
+</div>
+</body>
+</html>
